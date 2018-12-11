@@ -120,7 +120,7 @@ vector<vector<int> > detectFace(Mat frame); // 얼굴 및 눈 영역을 잡아�
 
 String face_cascade_name = "haarcascade_frontalface_alt.xml";
 String eyes_cascade_name = "haarcascade_eye_tree_eyeglasses.xml";
-String img_name = "sample6.jpg";
+String img_name = "sample2.jpg";
 CascadeClassifier face_cascade;
 CascadeClassifier eyes_cascade;
 
@@ -128,11 +128,12 @@ int main(int argc, const char** argv) {
 	Mat img = imread(img_name); // Mat구조체로 이미지 load하기
 	IplImage* img2 = new IplImage(img); // iplimage구조체로 이미지 load하기
 	IplImage* background = cvLoadImage("background.jpg"); // 미리 준비한 background 
-	int eye_radios[2]; 
+	int eye_radios[2]; // 타원의 긴 반지름, 작은 반지름
 
 	vector<vector<int> > info(2, vector<int>(3, 0));
 
 	IplImage* gray; // gray 이미지 처리를 위한 iplimage
+	IplImage* gray2; // gray 이미지 처리를 위한 iplimag
 
 	if (img.data == NULL) {
 		printf("이미지 열기 실패");
@@ -148,13 +149,6 @@ int main(int argc, const char** argv) {
 
 	info = detectFace(img);
 
-	for (int i = 0; i < 2; i++) {
-		for (int j = 0; j < 3; j++) {
-			cout << info[i][j] << " ";
-		}
-		cout << endl;
-	}
-
 	// 두 눈 영역 roi의 center값을 이은 직선
 	//cvLine(img2, cvPoint(info[1][0], info[1][1]), cvPoint(info[0][0], info[0][1]), CV_RGB(255, 0, 0), 1, 8);
 
@@ -164,7 +158,9 @@ int main(int argc, const char** argv) {
 	gray = cvCreateImage(cvGetSize(img2), IPL_DEPTH_8U, 1); // gray instance 생성
 	cvCvtColor(img2, gray, CV_RGB2GRAY); // img2를 gray 이미지로 변환
 	cvSmooth(gray, gray, CV_MEDIAN, 7, 7, 0, 0); // gray 이미지 노이즈 데이터 처리
-	cvThreshold(gray, gray, 70, 255, CV_THRESH_BINARY); // gray 이미지를 이진화 처리
+	cvThreshold(gray, gray, 70, 255, CV_THRESH_BINARY); // gray 이미지를 이진화 처리,70
+
+	cvMorphologyEx(gray, gray, NULL, NULL, CV_MOP_OPEN, 1); // 모폴로지 연산
 	
 	Mat Mat_img = cvarrToMat(gray); // iplimage 구조체 gray 이미지를 mat 구조체로 변환
 
@@ -174,6 +170,7 @@ int main(int argc, const char** argv) {
 	printf("center_x %d center_y %d\n", center_x, center_y); // roi's center
 
 	// 기존 data 출력
+	printf("data1\n");
 	for (int i = 0; i < Mat_img.rows; i++) { 
 		for (int j = 0; j < Mat_img.cols; j++) {
 			if (i == center_y && j == center_x) {
@@ -191,35 +188,62 @@ int main(int argc, const char** argv) {
 		printf("\n");
 	}
 
-	int flag = 0; // 눈 동공의 center_x값 찾기
+	int flag = 0; // roi 좌우 중심 맞추기
 	while (!flag) {
 		int right_count = 0;
-		for (int i = center_x + 1 ; i <= Mat_img.rows; i++) {
+		int right_count2 = 0;
+		int noise = 0;
+		for (int i = center_x + 1 ; i < Mat_img.rows; i++) {
 			if (Mat_img.at<uchar>(center_y, i) == 0 ) {
-				right_count++;
+				if (noise == 0) {
+					right_count++;
+				}
+				right_count2++;
 			}
 			else {
-				break;
+				if (Mat_img.at<uchar>(center_y, i - 1) == 0) { // @ -> *
+					noise++;
+				}
+
+				if (noise > 1) {
+					break;
+				}
+
+				right_count2++;
 			}
 		}
-		printf("###right_count: %d\n", right_count);
+
+		right_count = noise == 1 ? right_count : right_count2;
 
 		int left_count = 0;
-		for (int i = center_x - 1; i >= 0; i--) {
+		int left_count2 = 0;
+		noise = 0;
+		for (int i = center_x - 1; i > 0; i--) {
 			if (Mat_img.at<uchar>(center_y, i) == 0) {
-				left_count++;
+				if (noise == 0) {
+					left_count++;
+				}
+				left_count2++;
 			}
 			else {
-				break;
+				if (Mat_img.at<uchar>(center_y, i + 1) == 0) { // @ -> *
+					noise++;
+				}
+
+				if (noise > 1) {
+					break;
+				}
+
+				left_count2++;
 			}
 		}
 
-		printf("#left_count: %d\n", left_count);
+		left_count = (noise == 1) ? left_count : left_count2;
 
 		if (abs(right_count - left_count) <= 1 ) {
 			flag = 1;
-			eye_radios[0] = right_count;
-			printf("break right_count: %d, left_count %d\n", right_count, left_count);
+			eye_radios[0] = left_count > right_count ? left_count : right_count;
+			printf("<break_point1> right_count: %d, left_count %d\n", right_count, left_count);
 		}
 
 		else if (right_count > left_count) {
@@ -230,38 +254,63 @@ int main(int argc, const char** argv) {
 			center_x--;
 		}
 	}
-	printf("beter coding center_y: %d\n", center_y);
-
 	
 	flag = 0; // 눈 동공의 center_y값 찾기
 	while (!flag) {
 		int up_count = 0;
-		for (int i = center_y - 1; i >= 0; i--) {
+		int up_count2 = 0;
+		int noise = 0;
+		for (int i = center_y - 1; i > 0; i--) {
 			if (Mat_img.at<uchar>(i, center_x) == 0) {
-				up_count++;
+				if (noise == 0) {
+					up_count++;
+				}
+				up_count2++;
 			}
 			else {
-				break;
+				if (Mat_img.at<uchar>(i+1, center_x) == 0) {
+					noise++;
+				}
+
+				if (noise > 1) {
+					break;
+				}
+				
+				up_count2++;
 			}
 		}
-		printf("###up_count: %d\n", up_count);
+
+		up_count = (noise == 1) ? up_count : up_count2;
 
 		int down_count = 0;
-		for (int i = center_y + 1; i <= Mat_img.rows; i++) {
+		int down_count2 = 0;
+		noise = 0;
+		for (int i = center_y + 1; i < Mat_img.rows; i++) {
 			if (Mat_img.at<uchar>(i, center_x) == 0) {
-				down_count++;
+				if (noise == 0) {
+					down_count++;
+				}
+				down_count2++;
 			}
 			else {
-				break;
+				if (Mat_img.at<uchar>(i-1, center_x) == 0) {
+					noise++;
+				}
+
+				if (noise > 1) {
+					break;
+				}
+
+				down_count2++;
 			}
 		}
 
-		printf("#down_count: %d\n", down_count);
+		down_count = (noise == 1) ? down_count : down_count2;
 
 		if (abs(down_count - up_count) <= 1) {
 			flag = 1;
-			eye_radios[1] = down_count;
-			printf("break up_count: %d, down_count %d\n", up_count, down_count);
+			eye_radios[1] = down_count > up_count ? down_count : up_count;
+			printf("<break point2> up_count: %d, down_count %d\n", up_count, down_count);
 		}
 
 		else if (up_count > down_count) {
@@ -272,7 +321,10 @@ int main(int argc, const char** argv) {
 			center_y++;
 		}
 	}
-	// test
+
+
+	
+	// 눈동자의 중심 이동 후 출력
 	for (int i = 0; i < Mat_img.rows; i++) {
 		for (int j = 0; j < Mat_img.cols; j++) {
 			if (i == center_y && j == center_x) {
@@ -299,17 +351,224 @@ int main(int argc, const char** argv) {
 	}
 	*/
 
-	printf("%d %d", eye_radios[0], eye_radios[1]);
+	
+	printf("타원의 짧은 반지름 및 긴 반지름: \n", eye_radios[0], eye_radios[1]); // 타원의 짧은 반지름과 긴 반지름
 	int radios = eye_radios[0] > eye_radios[1] ? eye_radios[0] : eye_radios[1];
 	cvCircle(img2, cvPoint(center_x, center_y), radios, CV_RGB(255, 0, 0), 1, 8, 0);
 
+	cvNamedWindow("Example2", CV_WINDOW_AUTOSIZE);
+	cvShowImage("Example2", gray);
+
 	cvResetImageROI(img2);
+
+	//  roi의 범위 1/2로 줄이기
+	cvSetImageROI(img2, cvRect(info[1][0] - (info[1][2] / 2), info[1][1] - (info[1][2] / 2), info[1][2], info[1][2]));
+
+	gray2 = cvCreateImage(cvGetSize(img2), IPL_DEPTH_8U, 1); // gray instance 생성
+	cvCvtColor(img2, gray2, CV_RGB2GRAY); // img2를 gray 이미지로 변환
+	cvSmooth(gray2, gray2, CV_MEDIAN, 7, 7, 0, 0); // gray 이미지 노이즈 데이터 처리
+	cvThreshold(gray2, gray2, 70, 255, CV_THRESH_BINARY); // gray 이미지를 이진화 처리
+
+	Mat_img = cvarrToMat(gray2); // iplimage 구조체 gray 이미지를 mat 구조체로 변환
+
+	cvMorphologyEx(gray2, gray2, NULL, NULL, CV_MOP_OPEN, 1); // 모폴로지 연산
+
+	center_x = Mat_img.rows / 2; // 1/2 roi의 중심 x좌표
+	center_y = Mat_img.cols / 2; // 1/2 roi의 중심 y좌표
+
+	// 기존 data2 출력
+	printf("data2\n");
+	for (int i = 0; i < Mat_img.rows; i++) {
+		for (int j = 0; j < Mat_img.cols; j++) {
+			if (i == center_y && j == center_x) {
+				printf("7");
+			}
+
+			else if (Mat_img.at<uchar>(i, j) == 255) {
+				printf("*");
+			}
+
+			else if (Mat_img.at<uchar>(i, j) == 0) {
+				printf("@");
+			}
+		}
+		printf("\n");
+	}
+
+	flag = 0; // roi 좌우 중심 맞추기
+	while (!flag) {
+		int right_count = 0;
+		int right_count2 = 0;
+		int noise = 0;
+		for (int i = center_x + 1; i < Mat_img.rows; i++) {
+			if (Mat_img.at<uchar>(center_y, i) == 0) {
+				if (noise == 0) {
+					right_count++;
+				}
+				right_count2++;
+			}
+			else {
+				if (Mat_img.at<uchar>(center_y, i - 1) == 0) { // @ -> *
+					noise++;
+				}
+
+				if (noise > 1) {
+					break;
+				}
+
+				right_count2++;
+			}
+		}
+
+		right_count = (noise == 1) ? right_count : right_count2;
+
+		int left_count = 0;
+		int left_count2 = 0;
+		noise = 0;
+		for (int i = center_x - 1; i > 0; i--) {
+			if (Mat_img.at<uchar>(center_y, i) == 0) {
+				if (noise == 0) {
+					left_count++;
+				}
+				left_count2++;
+			}
+			else {
+				if (Mat_img.at<uchar>(center_y, i + 1) == 0) { // @ -> *
+					noise++;
+				}
+
+				if (noise > 1) {
+					break;
+				}
+
+				left_count2++;
+			}
+		}
+
+		left_count = (noise == 1) ? left_count : left_count2;
+
+		if (abs(right_count - left_count) <= 1) {
+			flag = 1;
+			eye_radios[0] = left_count > right_count ? left_count : right_count;
+			printf("<break poin3> left_count: %d, right_count %d\n", left_count, right_count);
+		}
+
+		else if (right_count > left_count) {
+			center_x++;
+		}
+
+		else if (right_count < left_count) {
+			center_x--;
+		}
+	}
+
+	flag = 0; // 눈 동공의 center_y값 찾기
+	while (!flag) {
+		int up_count = 0;
+		int up_count2 = 0;
+		int noise = 0;
+		for (int i = center_y - 1; i > 0; i--) {
+			if (Mat_img.at<uchar>(i, center_x) == 0) {
+				if (noise == 0) {
+					up_count++;
+				}
+				up_count2++;
+			}
+			else {
+				if (Mat_img.at<uchar>(i + 1, center_x) == 0) {
+					noise++;
+				}
+
+				if (noise > 1) {
+					break;
+				}
+
+				up_count2++;
+			}
+		}
+
+		up_count = noise == 1 ? up_count : up_count2;
+
+		int down_count = 0;
+		int down_count2 = 0;
+		noise = 0;
+		for (int i = center_y + 1; i < Mat_img.rows; i++) {
+			if (Mat_img.at<uchar>(i, center_x) == 0) {
+				if (noise == 0) {
+					down_count++;
+				}
+				down_count2++;
+			}
+			else {
+				if (Mat_img.at<uchar>(i - 1, center_x) == 0) {
+					noise++;
+				}
+
+				if (noise > 1) {
+					break;
+				}
+
+				down_count2++;
+			}
+		}
+
+		down_count = noise == 1 ? down_count : down_count2;
+
+		if (abs(down_count - up_count) <= 1) {
+			flag = 1;
+			eye_radios[1] = up_count > down_count ? up_count : down_count;
+			printf("<break poin4> up_count: %d, down_count %d\n", up_count, down_count);
+		}
+
+		else if (up_count > down_count) {
+			center_y--;
+		}
+
+		else if (up_count < down_count) {
+			center_y++;
+		}
+	}
+	
+
+	// test
+	for (int i = 0; i < Mat_img.rows; i++) {
+		for (int j = 0; j < Mat_img.cols; j++) {
+			if (i == center_y && j == center_x) {
+				printf("7");
+			}
+
+			else if (Mat_img.at<uchar>(i, j) == 255) {
+				printf("*");
+			}
+
+			else {
+				printf("@");
+			}
+		}
+		printf("\n");
+	}
+
+	/* 이미지 출력
+	for (int i = 0; i < Mat_img.rows; i++) {
+	for (int j = 0; j < Mat_img.cols; j++) {
+	printf("%d ", Mat_img.at<uchar>(i, j));
+	}
+	printf("\n");
+	}
+	*/
+
+	printf("타원의 짧은 반지름 및 긴 반지름 %d %d\n", eye_radios[1], eye_radios[0]); // 타원의 짧은 반지름과 긴 반지름
+	radios = eye_radios[0] > eye_radios[1] ? eye_radios[0] : eye_radios[1];
+	cvCircle(img2, cvPoint(center_x, center_y), radios, CV_RGB(255, 0, 0), 1, 8, 0);
+
+	cvResetImageROI(img2); // end
 	
 	cvNamedWindow("Example1", CV_WINDOW_AUTOSIZE);
 	cvShowImage("Example1", img2);
 
-	cvNamedWindow("Example2", CV_WINDOW_AUTOSIZE);
-	cvShowImage("Example2", gray);
+	cvNamedWindow("Example3", CV_WINDOW_AUTOSIZE);
+	cvShowImage("Example3", gray2);
+
 	cvWaitKey(0);
 
 	cvReleaseImage(&img2);
@@ -317,6 +576,9 @@ int main(int argc, const char** argv) {
 
 	cvReleaseImage(&gray);
 	cvDestroyWindow("Example2");
+
+	cvReleaseImage(&gray2);
+	cvDestroyWindow("Example3");
 
 	//cvSetImageROI(img2, detectFace(img));
 	//info = detectFace(img);
