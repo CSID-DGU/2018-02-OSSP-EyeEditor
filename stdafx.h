@@ -5,6 +5,9 @@
 
 #pragma once
 
+//#pragma comment(linker, "/entry:WinMainCRTStartup /subsystem:console") // 콘솔창 띄우기
+
+
 #ifndef VC_EXTRALEAN
 #define VC_EXTRALEAN            // 거의 사용되지 않는 내용은 Windows 헤더에서 제외합니다.
 #endif
