@@ -1,7 +1,7 @@
 // ttp://blog.naver.com/PostView.nhn?blogId=koreahu&logNo=220882065913
 
 
-// MFCApplication1Dlg.cpp : ±¸Çö ÆÄÀÏ
+// MFCApplication1Dlg.cpp : êµ¬í˜„ íŒŒì¼
 //
 
 #include "stdafx.h"
@@ -13,22 +13,22 @@
 #define new DEBUG_NEW
 #endif
 
-// ÀÀ¿ë ÇÁ·Î±×·¥ Á¤º¸¿¡ »ç¿ëµÇ´Â CAboutDlg ´ëÈ­ »óÀÚÀÔ´Ï´Ù.
+// ì‘ìš© í”„ë¡œê·¸ë¨ ì •ë³´ì— ì‚¬ìš©ë˜ëŠ” CAboutDlg ëŒ€í™” ìƒìì…ë‹ˆë‹¤.
 
 class CAboutDlg : public CDialogEx
 {
 public:
 	CAboutDlg();
 
-// ´ëÈ­ »óÀÚ µ¥ÀÌÅÍÀÔ´Ï´Ù.
+// ëŒ€í™” ìƒì ë°ì´í„°ì…ë‹ˆë‹¤.
 #ifdef AFX_DESIGN_TIME
 	enum { IDD = IDD_ABOUTBOX };
 #endif
 
 	protected:
-	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV Áö¿øÀÔ´Ï´Ù.
+	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV ì§€ì›ì…ë‹ˆë‹¤.
 
-// ±¸ÇöÀÔ´Ï´Ù.
+// êµ¬í˜„ì…ë‹ˆë‹¤.
 protected:
 	DECLARE_MESSAGE_MAP()
 };
@@ -46,7 +46,7 @@ BEGIN_MESSAGE_MAP(CAboutDlg, CDialogEx)
 END_MESSAGE_MAP()
 
 
-// CMFCApplication1Dlg ´ëÈ­ »óÀÚ
+// CMFCApplication1Dlg ëŒ€í™” ìƒì
 
 
 
@@ -73,15 +73,15 @@ BEGIN_MESSAGE_MAP(CMFCApplication1Dlg, CDialogEx)
 END_MESSAGE_MAP()
 
 
-// CMFCApplication1Dlg ¸Ş½ÃÁö Ã³¸®±â
+// CMFCApplication1Dlg ë©”ì‹œì§€ ì²˜ë¦¬ê¸°
 
 BOOL CMFCApplication1Dlg::OnInitDialog()
 {
 	CDialogEx::OnInitDialog();
 
-	// ½Ã½ºÅÛ ¸Ş´º¿¡ "Á¤º¸..." ¸Ş´º Ç×¸ñÀ» Ãß°¡ÇÕ´Ï´Ù.
+	// ì‹œìŠ¤í…œ ë©”ë‰´ì— "ì •ë³´..." ë©”ë‰´ í•­ëª©ì„ ì¶”ê°€í•©ë‹ˆë‹¤.
 
-	// IDM_ABOUTBOX´Â ½Ã½ºÅÛ ¸í·É ¹üÀ§¿¡ ÀÖ¾î¾ß ÇÕ´Ï´Ù.
+	// IDM_ABOUTBOXëŠ” ì‹œìŠ¤í…œ ëª…ë ¹ ë²”ìœ„ì— ìˆì–´ì•¼ í•©ë‹ˆë‹¤.
 	ASSERT((IDM_ABOUTBOX & 0xFFF0) == IDM_ABOUTBOX);
 	ASSERT(IDM_ABOUTBOX < 0xF000);
 
@@ -99,14 +99,14 @@ BOOL CMFCApplication1Dlg::OnInitDialog()
 		}
 	}
 
-	// ÀÌ ´ëÈ­ »óÀÚÀÇ ¾ÆÀÌÄÜÀ» ¼³Á¤ÇÕ´Ï´Ù.  ÀÀ¿ë ÇÁ·Î±×·¥ÀÇ ÁÖ Ã¢ÀÌ ´ëÈ­ »óÀÚ°¡ ¾Æ´Ò °æ¿ì¿¡´Â
-	//  ÇÁ·¹ÀÓ¿öÅ©°¡ ÀÌ ÀÛ¾÷À» ÀÚµ¿À¸·Î ¼öÇàÇÕ´Ï´Ù.
-	SetIcon(m_hIcon, TRUE);			// Å« ¾ÆÀÌÄÜÀ» ¼³Á¤ÇÕ´Ï´Ù.
-	SetIcon(m_hIcon, FALSE);		// ÀÛÀº ¾ÆÀÌÄÜÀ» ¼³Á¤ÇÕ´Ï´Ù.
+	// ì´ ëŒ€í™” ìƒìì˜ ì•„ì´ì½˜ì„ ì„¤ì •í•©ë‹ˆë‹¤.  ì‘ìš© í”„ë¡œê·¸ë¨ì˜ ì£¼ ì°½ì´ ëŒ€í™” ìƒìê°€ ì•„ë‹ ê²½ìš°ì—ëŠ”
+	//  í”„ë ˆì„ì›Œí¬ê°€ ì´ ì‘ì—…ì„ ìë™ìœ¼ë¡œ ìˆ˜í–‰í•©ë‹ˆë‹¤.
+	SetIcon(m_hIcon, TRUE);			// í° ì•„ì´ì½˜ì„ ì„¤ì •í•©ë‹ˆë‹¤.
+	SetIcon(m_hIcon, FALSE);		// ì‘ì€ ì•„ì´ì½˜ì„ ì„¤ì •í•©ë‹ˆë‹¤.
 
-	// TODO: ¿©±â¿¡ Ãß°¡ ÃÊ±âÈ­ ÀÛ¾÷À» Ãß°¡ÇÕ´Ï´Ù.
+	// TODO: ì—¬ê¸°ì— ì¶”ê°€ ì´ˆê¸°í™” ì‘ì—…ì„ ì¶”ê°€í•©ë‹ˆë‹¤.
 
-	return TRUE;  // Æ÷Ä¿½º¸¦ ÄÁÆ®·Ñ¿¡ ¼³Á¤ÇÏÁö ¾ÊÀ¸¸é TRUE¸¦ ¹İÈ¯ÇÕ´Ï´Ù.
+	return TRUE;  // í¬ì»¤ìŠ¤ë¥¼ ì»¨íŠ¸ë¡¤ì— ì„¤ì •í•˜ì§€ ì•Šìœ¼ë©´ TRUEë¥¼ ë°˜í™˜í•©ë‹ˆë‹¤.
 }
 
 void CMFCApplication1Dlg::OnSysCommand(UINT nID, LPARAM lParam)
@@ -122,19 +122,19 @@ void CMFCApplication1Dlg::OnSysCommand(UINT nID, LPARAM lParam)
 	}
 }
 
-// ´ëÈ­ »óÀÚ¿¡ ÃÖ¼ÒÈ­ ´ÜÃß¸¦ Ãß°¡ÇÒ °æ¿ì ¾ÆÀÌÄÜÀ» ±×¸®·Á¸é
-//  ¾Æ·¡ ÄÚµå°¡ ÇÊ¿äÇÕ´Ï´Ù.  ¹®¼­/ºä ¸ğµ¨À» »ç¿ëÇÏ´Â MFC ÀÀ¿ë ÇÁ·Î±×·¥ÀÇ °æ¿ì¿¡´Â
-//  ÇÁ·¹ÀÓ¿öÅ©¿¡¼­ ÀÌ ÀÛ¾÷À» ÀÚµ¿À¸·Î ¼öÇàÇÕ´Ï´Ù.
+// ëŒ€í™” ìƒìì— ìµœì†Œí™” ë‹¨ì¶”ë¥¼ ì¶”ê°€í•  ê²½ìš° ì•„ì´ì½˜ì„ ê·¸ë¦¬ë ¤ë©´
+//  ì•„ë˜ ì½”ë“œê°€ í•„ìš”í•©ë‹ˆë‹¤.  ë¬¸ì„œ/ë·° ëª¨ë¸ì„ ì‚¬ìš©í•˜ëŠ” MFC ì‘ìš© í”„ë¡œê·¸ë¨ì˜ ê²½ìš°ì—ëŠ”
+//  í”„ë ˆì„ì›Œí¬ì—ì„œ ì´ ì‘ì—…ì„ ìë™ìœ¼ë¡œ ìˆ˜í–‰í•©ë‹ˆë‹¤.
 
 void CMFCApplication1Dlg::OnPaint()
 {
 	if (IsIconic())
 	{
-		CPaintDC dc(this); // ±×¸®±â¸¦ À§ÇÑ µğ¹ÙÀÌ½º ÄÁÅØ½ºÆ®ÀÔ´Ï´Ù.
+		CPaintDC dc(this); // ê·¸ë¦¬ê¸°ë¥¼ ìœ„í•œ ë””ë°”ì´ìŠ¤ ì»¨í…ìŠ¤íŠ¸ì…ë‹ˆë‹¤.
 
 		SendMessage(WM_ICONERASEBKGND, reinterpret_cast<WPARAM>(dc.GetSafeHdc()), 0);
 
-		// Å¬¶óÀÌ¾ğÆ® »ç°¢Çü¿¡¼­ ¾ÆÀÌÄÜÀ» °¡¿îµ¥¿¡ ¸ÂÃä´Ï´Ù.
+		// í´ë¼ì´ì–¸íŠ¸ ì‚¬ê°í˜•ì—ì„œ ì•„ì´ì½˜ì„ ê°€ìš´ë°ì— ë§ì¶¥ë‹ˆë‹¤.
 		int cxIcon = GetSystemMetrics(SM_CXICON);
 		int cyIcon = GetSystemMetrics(SM_CYICON);
 		CRect rect;
@@ -142,12 +142,12 @@ void CMFCApplication1Dlg::OnPaint()
 		int x = (rect.Width() - cxIcon + 1) / 2;
 		int y = (rect.Height() - cyIcon + 1) / 2;
 
-		// ¾ÆÀÌÄÜÀ» ±×¸³´Ï´Ù.
+		// ì•„ì´ì½˜ì„ ê·¸ë¦½ë‹ˆë‹¤.
 		dc.DrawIcon(x, y, m_hIcon);
 	}
 	else
 	{
-		if (m_pImage) { // IplImage ÇüÀÇ ÀÌ¹ÌÁö¸¦ CvvImage ÇüÀ¸·Î º¹»çÇÑ µÚ ±× ÇÚµéÀ» ÀÌ¿ëÇÏ¿© Static Control ¿¡ ÀÌ¹ÌÁö¸¦ Ãâ·Â
+		if (m_pImage) { // IplImage í˜•ì˜ ì´ë¯¸ì§€ë¥¼ CvvImage í˜•ìœ¼ë¡œ ë³µì‚¬í•œ ë’¤ ê·¸ í•¸ë“¤ì„ ì´ìš©í•˜ì—¬ Static Control ì— ì´ë¯¸ì§€ë¥¼ ì¶œë ¥
 
 			CDC* pDC;
 			CRect rect;
@@ -166,16 +166,16 @@ void CMFCApplication1Dlg::OnPaint()
 
 }
 
-// »ç¿ëÀÚ°¡ ÃÖ¼ÒÈ­µÈ Ã¢À» ²ô´Â µ¿¾È¿¡ Ä¿¼­°¡ Ç¥½ÃµÇµµ·Ï ½Ã½ºÅÛ¿¡¼­
-//  ÀÌ ÇÔ¼ö¸¦ È£ÃâÇÕ´Ï´Ù.
+// ì‚¬ìš©ìê°€ ìµœì†Œí™”ëœ ì°½ì„ ë„ëŠ” ë™ì•ˆì— ì»¤ì„œê°€ í‘œì‹œë˜ë„ë¡ ì‹œìŠ¤í…œì—ì„œ
+//  ì´ í•¨ìˆ˜ë¥¼ í˜¸ì¶œí•©ë‹ˆë‹¤.
 HCURSOR CMFCApplication1Dlg::OnQueryDragIcon()
 {
 	return static_cast<HCURSOR>(m_hIcon);
 }
 
 void CMFCApplication1Dlg::OnBnClickedButton1() {
-	// TODO: ¿©±â¿¡ ÄÁÆ®·Ñ ¾Ë¸² Ã³¸®±â ÄÚµå¸¦ Ãß°¡ÇÕ´Ï´Ù.
-	// TODO: ¿©±â¿¡ ÄÁÆ®·Ñ ¾Ë¸² Ã³¸®±â ÄÚµå¸¦ Ãß°¡ÇÕ´Ï´Ù.
+	// TODO: ì—¬ê¸°ì— ì»¨íŠ¸ë¡¤ ì•Œë¦¼ ì²˜ë¦¬ê¸° ì½”ë“œë¥¼ ì¶”ê°€í•©ë‹ˆë‹¤.
+	// TODO: ì—¬ê¸°ì— ì»¨íŠ¸ë¡¤ ì•Œë¦¼ ì²˜ë¦¬ê¸° ì½”ë“œë¥¼ ì¶”ê°€í•©ë‹ˆë‹¤.
 	IplImage * image = cvLoadImage("selfie.jpg", -1);
 	cvShowImage("Start OpenCV with MFC", image);
 	cvWaitKey(0);
@@ -184,13 +184,13 @@ void CMFCApplication1Dlg::OnBnClickedButton1() {
 
 void CMFCApplication1Dlg::OnBnClickedButton2()
 {
-	// TODO: ¿©±â¿¡ ÄÁÆ®·Ñ ¾Ë¸² Ã³¸®±â ÄÚµå¸¦ Ãß°¡ÇÕ´Ï´Ù.
-	if (m_pImage != NULL) cvReleaseImage(&m_pImage); // m_pImage °´Ã¼°¡ NULL ÀÌ ¾Æ´Ï¶ó¸é cvReleaseImage ·Î ¼Ò¸ê
+	// TODO: ì—¬ê¸°ì— ì»¨íŠ¸ë¡¤ ì•Œë¦¼ ì²˜ë¦¬ê¸° ì½”ë“œë¥¼ ì¶”ê°€í•©ë‹ˆë‹¤.
+	if (m_pImage != NULL) cvReleaseImage(&m_pImage); // m_pImage ê°ì²´ê°€ NULL ì´ ì•„ë‹ˆë¼ë©´ cvReleaseImage ë¡œ ì†Œë©¸
 
-	m_pImage = cvLoadImage("iu.jpg", -1); // cvLoadImage ·Î ¿øÇÏ´Â ÀÌ¹ÌÁö ÆÄÀÏÀ» ·ÎµùÇÏ°í ±× ¸®ÅÏ°ªÀ» m_pImage ¿¡ ÀúÀå
+	m_pImage = cvLoadImage("iu.jpg", -1); // cvLoadImage ë¡œ ì›í•˜ëŠ” ì´ë¯¸ì§€ íŒŒì¼ì„ ë¡œë”©í•˜ê³  ê·¸ ë¦¬í„´ê°’ì„ m_pImage ì— ì €ì¥
 
-	// Static ¿µ¿ªÀ» »õ·Î ±×¸®±âÀ§ÇØ InvalidateRect ¸¦ È£ÃâÇÑ´Ù.
-    // ±×·¯¸é OnPaint ÇÔ¼ö°¡ È£Ãâ µÉ°ÍÀÌ´Ù.¿©±â¿¡ ¸®ÅÏ ¹ŞÀº m_pImage¸¦ ±×·Á ³Ö´Â´Ù
+	// Static ì˜ì—­ì„ ìƒˆë¡œ ê·¸ë¦¬ê¸°ìœ„í•´ InvalidateRect ë¥¼ í˜¸ì¶œí•œë‹¤.
+    // ê·¸ëŸ¬ë©´ OnPaint í•¨ìˆ˜ê°€ í˜¸ì¶œ ë ê²ƒì´ë‹¤.ì—¬ê¸°ì— ë¦¬í„´ ë°›ì€ m_pImageë¥¼ ê·¸ë ¤ ë„£ëŠ”ë‹¤
 
 	Invalidate(FALSE);
 }
@@ -202,8 +202,8 @@ BOOL CMFCApplication1Dlg::DestroyWindow() {
 
 void CMFCApplication1Dlg::OnBnClickedOpen()
 {
-	// TODO: ¿©±â¿¡ ÄÁÆ®·Ñ ¾Ë¸² Ã³¸®±â ÄÚµå¸¦ Ãß°¡ÇÕ´Ï´Ù.
-	static TCHAR BASED_CODE szFilter[] = _T("ÀÌ¹ÌÁö ÆÄÀÏ(*.BMP, *.GIF, *.JPG) | *.BMP;*.GIF;*.JPG;*.bmp;*.jpg;*.gif |¸ğµçÆÄÀÏ(*.*)|*.*||");
+	// TODO: ì—¬ê¸°ì— ì»¨íŠ¸ë¡¤ ì•Œë¦¼ ì²˜ë¦¬ê¸° ì½”ë“œë¥¼ ì¶”ê°€í•©ë‹ˆë‹¤.
+	static TCHAR BASED_CODE szFilter[] = _T("ì´ë¯¸ì§€ íŒŒì¼(*.BMP, *.GIF, *.JPG) | *.BMP;*.GIF;*.JPG;*.bmp;*.jpg;*.gif |ëª¨ë“ íŒŒì¼(*.*)|*.*||");
 	CFileDialog dlg(TRUE, _T("*.jpg"), _T("image"), OFN_HIDEREADONLY, szFilter);
 
 	if (IDOK == dlg.DoModal())
@@ -212,9 +212,9 @@ void CMFCApplication1Dlg::OnBnClickedOpen()
 		CString pathName = dlg.GetPathName();
 		CT2CA pszConvertedAnsiString(pathName);
 
-		m_pImage = cvLoadImage(pszConvertedAnsiString, -1); // ÀÌ¹ÌÁö path
+		m_pImage = cvLoadImage(pszConvertedAnsiString, -1); // ì´ë¯¸ì§€ path
 
-		Invalidate(FALSE);    //CFileOpenDlg::OnPaint()¿¡¼­ Picture Control¿¡ ±×·ÁÁÖ´Â ÇÔ¼ö Ãß°¡ÇÒ °Í
+		Invalidate(FALSE);    //CFileOpenDlg::OnPaint()ì—ì„œ Picture Controlì— ê·¸ë ¤ì£¼ëŠ” í•¨ìˆ˜ ì¶”ê°€í•  ê²ƒ
 
 	}
 }
@@ -222,14 +222,591 @@ void CMFCApplication1Dlg::OnBnClickedOpen()
 
 void CMFCApplication1Dlg::OnBnClickedButton4()
 {
-	// TODO: ¿©±â¿¡ ÄÁÆ®·Ñ ¾Ë¸² Ã³¸®±â ÄÚµå¸¦ Ãß°¡ÇÕ´Ï´Ù.
+	// TODO: ì—¬ê¸°ì— ì»¨íŠ¸ë¡¤ ì•Œë¦¼ ì²˜ë¦¬ê¸° ì½”ë“œë¥¼ ì¶”ê°€í•©ë‹ˆë‹¤.
 	if (m_pImage) {
-		cvSetImageROI(m_pImage, cvRect(150, 100, 270, 270));
-		cvAddS(m_pImage, cvScalar(200), m_pImage);
-		cvResetImageROI(m_pImage);
+		//cvSetImageROI(m_pImage, cvRect(150, 100, 270, 270));
+		//cvAddS(m_pImage, cvScalar(200), m_pImage);
+		//cvResetImageROI(m_pImage);
+		
+		Mat img = cvarrToMat(m_pImage);
+		IplImage* img2 = new IplImage(img);
+		IplImage* background = cvLoadImage("background.jpg"); // ë¯¸ë¦¬ ì¤€ë¹„í•œ background 
+		int eye_radios[2]; // íƒ€ì›ì˜ ê¸´ ë°˜ì§€ë¦„, ì‘ì€ ë°˜ì§€ë¦„
 
+
+		vector<vector<int> > info(2, vector<int>(3, 0));
+		//IplImage* img2 = m_pImage;
+
+		IplImage* gray; // gray ì´ë¯¸ì§€ ì²˜ë¦¬ë¥¼ ìœ„í•œ iplimage
+		IplImage* gray2; // gray ì´ë¯¸ì§€ ì²˜ë¦¬ë¥¼ ìœ„í•œ iplimag
+
+		info = detectFace(img);
+
+		// infoê°’ ì¶œë ¥
+		printf("%d %d %d\n", info[0][0], info[0][1], info[0][2]);
+		printf("%d %d %d\n", info[1][0], info[1][1], info[1][2]);
+
+		// ë‘ ëˆˆ ì˜ì—­ roiì˜ centerê°’ì„ ì´ì€ ì§ì„ 
+		//cvLine(img2, cvPoint(info[1][0], info[1][1]), cvPoint(info[0][0], info[0][1]), CV_RGB(255, 0, 0), 1, 8);
+
+		// roiì˜ ë²”ìœ„ 1/2ë¡œ ì¤„ì´ê¸°
+		cvSetImageROI(img2, cvRect(info[0][0] - (info[0][2] / 2), info[0][1] - (info[0][2] / 2), info[0][2], info[0][2]));
+		cout << "circle1's center_x : " << info[0][0] << " circle1's center_y : " << info[0][1] << endl;
+
+		gray = cvCreateImage(cvGetSize(img2), IPL_DEPTH_8U, 1); // gray instance ìƒì„±
+		cvCvtColor(img2, gray, CV_RGB2GRAY); // img2ë¥¼ gray ì´ë¯¸ì§€ë¡œ ë³€í™˜
+		cvSmooth(gray, gray, CV_MEDIAN, 7, 7, 0, 0); // gray ì´ë¯¸ì§€ ë…¸ì´ì¦ˆ ë°ì´í„° ì²˜ë¦¬
+		cvThreshold(gray, gray, 70, 255, CV_THRESH_BINARY); // gray ì´ë¯¸ì§€ë¥¼ ì´ì§„í™” ì²˜ë¦¬,70
+
+		cvMorphologyEx(gray, gray, NULL, NULL, CV_MOP_OPEN, 1); // ëª¨í´ë¡œì§€ ì—°ì‚°
+
+		Mat Mat_img = cvarrToMat(gray); // iplimage êµ¬ì¡°ì²´ gray ì´ë¯¸ì§€ë¥¼ mat êµ¬ì¡°ì²´ë¡œ ë³€í™˜
+
+		int center_x = Mat_img.rows / 2; // 1/2 roiì˜ ì¤‘ì‹¬ xì¢Œí‘œ
+		int center_y = Mat_img.cols / 2; // 1/2 roiì˜ ì¤‘ì‹¬ yì¢Œí‘œ
+
+		printf("center_x %d center_y %d\n", center_x, center_y); // roi's center
+
+																 // ê¸°ì¡´ data ì¶œë ¥
+		printf("data1\n");
+		for (int i = 0; i < Mat_img.rows; i++) {
+			for (int j = 0; j < Mat_img.cols; j++) {
+				if (i == center_y && j == center_x) {
+					printf("7");
+				}
+
+				else if (Mat_img.at<uchar>(i, j) == 255) {
+					printf("*");
+				}
+
+				else if (Mat_img.at<uchar>(i, j) == 0) {
+					printf("@");
+				}
+			}
+			printf("\n");
+		}
+
+		int flag = 0; // roi ì¢Œìš° ì¤‘ì‹¬ ë§ì¶”ê¸°
+		while (!flag) {
+			int right_count = 0;
+			int right_count2 = 0;
+			int noise = 0;
+			for (int i = center_x + 1; i < Mat_img.rows; i++) {
+				if (Mat_img.at<uchar>(center_y, i) == 0) {
+					if (noise == 0) {
+						right_count++;
+					}
+					right_count2++;
+				}
+				else {
+					if (Mat_img.at<uchar>(center_y, i - 1) == 0) { // @ -> *
+						noise++;
+					}
+
+					if (noise > 1) {
+						break;
+					}
+
+					right_count2++;
+				}
+			}
+
+			right_count = noise == 1 ? right_count : right_count2;
+
+			int left_count = 0;
+			int left_count2 = 0;
+			noise = 0;
+			for (int i = center_x - 1; i > 0; i--) {
+				if (Mat_img.at<uchar>(center_y, i) == 0) {
+					if (noise == 0) {
+						left_count++;
+					}
+					left_count2++;
+				}
+				else {
+					if (Mat_img.at<uchar>(center_y, i + 1) == 0) { // @ -> *
+						noise++;
+					}
+
+					if (noise > 1) {
+						break;
+					}
+
+					left_count2++;
+				}
+			}
+
+			left_count = (noise == 1) ? left_count : left_count2;
+
+			if (abs(right_count - left_count) <= 1) {
+				flag = 1;
+				eye_radios[0] = left_count > right_count ? left_count : right_count;
+				printf("<break_point1> right_count: %d, left_count %d\n", right_count, left_count);
+			}
+
+			else if (right_count > left_count) {
+				center_x++;
+			}
+
+			else if (right_count < left_count) {
+				center_x--;
+			}
+		}
+
+		flag = 0; // ëˆˆ ë™ê³µì˜ center_yê°’ ì°¾ê¸°
+		while (!flag) {
+			int up_count = 0;
+			int up_count2 = 0;
+			int noise = 0;
+			for (int i = center_y - 1; i > 0; i--) {
+				if (Mat_img.at<uchar>(i, center_x) == 0) {
+					if (noise == 0) {
+						up_count++;
+					}
+					up_count2++;
+				}
+				else {
+					if (Mat_img.at<uchar>(i + 1, center_x) == 0) {
+						noise++;
+					}
+
+					if (noise > 1) {
+						break;
+					}
+
+					up_count2++;
+				}
+			}
+
+			up_count = (noise == 1) ? up_count : up_count2;
+
+			int down_count = 0;
+			int down_count2 = 0;
+			noise = 0;
+			for (int i = center_y + 1; i < Mat_img.rows; i++) {
+				if (Mat_img.at<uchar>(i, center_x) == 0) {
+					if (noise == 0) {
+						down_count++;
+					}
+					down_count2++;
+				}
+				else {
+					if (Mat_img.at<uchar>(i - 1, center_x) == 0) {
+						noise++;
+					}
+
+					if (noise > 1) {
+						break;
+					}
+
+					down_count2++;
+				}
+			}
+
+			down_count = (noise == 1) ? down_count : down_count2;
+
+			if (abs(down_count - up_count) <= 1) {
+				flag = 1;
+				eye_radios[1] = down_count > up_count ? down_count : up_count;
+				printf("<break point2> up_count: %d, down_count %d\n", up_count, down_count);
+			}
+
+			else if (up_count > down_count) {
+				center_y--;
+			}
+
+			else if (up_count < down_count) {
+				center_y++;
+			}
+		}
+
+
+
+		// ëˆˆë™ìì˜ ì¤‘ì‹¬ ì´ë™ í›„ ì¶œë ¥
+		for (int i = 0; i < Mat_img.rows; i++) {
+			for (int j = 0; j < Mat_img.cols; j++) {
+				if (i == center_y && j == center_x) {
+					printf("7");
+				}
+
+				else if (Mat_img.at<uchar>(i, j) == 255) {
+					printf("*");
+				}
+
+				else {
+					printf("@");
+				}
+			}
+			printf("\n");
+		}
+
+		/* ì´ë¯¸ì§€ ì¶œë ¥
+		for (int i = 0; i < Mat_img.rows; i++) {
+		for (int j = 0; j < Mat_img.cols; j++) {
+		printf("%d ", Mat_img.at<uchar>(i, j));
+		}
+		printf("\n");
+		}
+		*/
+
+
+		printf("íƒ€ì›ì˜ ì§§ì€ ë°˜ì§€ë¦„ ë° ê¸´ ë°˜ì§€ë¦„: \n", eye_radios[0], eye_radios[1]); // íƒ€ì›ì˜ ì§§ì€ ë°˜ì§€ë¦„ê³¼ ê¸´ ë°˜ì§€ë¦„
+		int radios = eye_radios[0] > eye_radios[1] ? eye_radios[0] : eye_radios[1];
+		//cvCircle(img2, cvPoint(center_x, center_y), radios, CV_RGB(255, 0, 0), 1, 8, 0); // ëˆˆë™ì detect
+
+
+		// ë°ì´í„° ë³€í˜• ì²˜ë¦¬
+		cvResetImageROI(img2);
+		cvSetImageROI(img2, cvRect(info[0][0] - (info[0][2] / 2) + center_x - radios, info[0][1] - (info[0][2] / 2) + center_y - radios, radios * 2, radios * 2));
+		//cvAddS(img2, cvScalar(200), img2);
+
+		IplImage* mask_img2 = cvCreateImage(cvSize(radios * 2, radios * 2), IPL_DEPTH_8U, 1); // 3
+		cvSet(mask_img2, cvScalarAll(255));
+
+		cvCircle(mask_img2, cvPoint(radios, radios), radios*0.85, CV_RGB(0, 0, 0), -1, 8, 0);
+		cvCircle(mask_img2, cvPoint(radios, radios), radios*0.45, CV_RGB(255, 255, 255), -1, 8, 0);
+
+		cout << "radios: " << radios << endl;
+
+		int target_position2[10000][2] = { 0 };
+		int t_index2 = 0;
+		for (int i = 0; i < radios * 2; i++) {
+			for (int j = 0; j < radios * 2; j++) {
+				double value = cvGetReal2D(mask_img2, i, j);
+				//int a = value > 100 ? 2 : 0;
+				//cout << a << " ";
+
+				if (value < 100) {
+					target_position2[t_index2][0] = i;
+					target_position2[t_index2][1] = j;
+					t_index2++;
+				}
+			}
+		}
+
+		cvResetImageROI(img2);
+
+		for (int i = 0; i < t_index2; i++) { // donutëª¨ì–‘ìœ¼ë¡œ 
+			cvSetImageROI(m_pImage, cvRect(info[0][0] - (info[0][2] / 2) + center_x - radios + target_position2[i][0], info[0][1] - (info[0][2] / 2) + center_y - radios + target_position2[i][1], 1, 1));
+			cvSetImageROI(background, cvRect(info[0][0] - (info[0][2] / 2) + center_x - radios + target_position2[i][0], info[0][1] - (info[0][2] / 2) + center_y - radios + target_position2[i][1], 1, 1));
+			cvAddS(m_pImage, cvScalar(150), m_pImage);
+			//cvAddWeighted(img2, 0.6, background, 0.4, 0.0, img2);
+			cvResetImageROI(m_pImage);
+			cvResetImageROI(background);
+		}
+
+
+		//cvNamedWindow("Example2", CV_WINDOW_AUTOSIZE);
+		//cvShowImage("Example2", gray);
+
+		cvResetImageROI(img2);
+
+		//  roiì˜ ë²”ìœ„ 1/2ë¡œ ì¤„ì´ê¸°
+		cvSetImageROI(img2, cvRect(info[1][0] - (info[1][2] / 2), info[1][1] - (info[1][2] / 2), info[1][2], info[1][2]));
+		cout << "before circle2's center_x : " << info[0][0] << " circle2's center_y : " << info[0][1] << endl;
+
+		gray2 = cvCreateImage(cvGetSize(img2), IPL_DEPTH_8U, 1); // gray instance ìƒì„±
+		cvCvtColor(img2, gray2, CV_RGB2GRAY); // img2ë¥¼ gray ì´ë¯¸ì§€ë¡œ ë³€í™˜
+		cvSmooth(gray2, gray2, CV_MEDIAN, 7, 7, 0, 0); // gray ì´ë¯¸ì§€ ë…¸ì´ì¦ˆ ë°ì´í„° ì²˜ë¦¬
+		cvThreshold(gray2, gray2, 70, 255, CV_THRESH_BINARY); // gray ì´ë¯¸ì§€ë¥¼ ì´ì§„í™” ì²˜ë¦¬
+
+		Mat_img = cvarrToMat(gray2); // iplimage êµ¬ì¡°ì²´ gray ì´ë¯¸ì§€ë¥¼ mat êµ¬ì¡°ì²´ë¡œ ë³€í™˜
+
+		cvMorphologyEx(gray2, gray2, NULL, NULL, CV_MOP_OPEN, 1); // ëª¨í´ë¡œì§€ ì—°ì‚°
+
+		center_x = Mat_img.rows / 2; // 1/2 roiì˜ ì¤‘ì‹¬ xì¢Œí‘œ
+		center_y = Mat_img.cols / 2; // 1/2 roiì˜ ì¤‘ì‹¬ yì¢Œí‘œ
+
+									 // ê¸°ì¡´ data2 ì¶œë ¥
+		printf("data2\n");
+		for (int i = 0; i < Mat_img.rows; i++) {
+			for (int j = 0; j < Mat_img.cols; j++) {
+				if (i == center_y && j == center_x) {
+					printf("7");
+				}
+
+				else if (Mat_img.at<uchar>(i, j) == 255) {
+					printf("*");
+				}
+
+				else if (Mat_img.at<uchar>(i, j) == 0) {
+					printf("@");
+				}
+			}
+			printf("\n");
+		}
+
+		flag = 0; // roi ì¢Œìš° ì¤‘ì‹¬ ë§ì¶”ê¸°
+		while (!flag) {
+			int right_count = 0;
+			int right_count2 = 0;
+			int noise = 0;
+			for (int i = center_x + 1; i < Mat_img.rows; i++) {
+				if (Mat_img.at<uchar>(center_y, i) == 0) {
+					if (noise == 0) {
+						right_count++;
+					}
+					right_count2++;
+				}
+				else {
+					if (Mat_img.at<uchar>(center_y, i - 1) == 0) { // @ -> *
+						noise++;
+					}
+
+					if (noise > 1) {
+						break;
+					}
+
+					right_count2++;
+				}
+			}
+
+			right_count = (noise == 1) ? right_count : right_count2;
+
+			int left_count = 0;
+			int left_count2 = 0;
+			noise = 0;
+			for (int i = center_x - 1; i > 0; i--) {
+				if (Mat_img.at<uchar>(center_y, i) == 0) {
+					if (noise == 0) {
+						left_count++;
+					}
+					left_count2++;
+				}
+				else {
+					if (Mat_img.at<uchar>(center_y, i + 1) == 0) { // @ -> *
+						noise++;
+					}
+
+					if (noise > 1) {
+						break;
+					}
+
+					left_count2++;
+				}
+			}
+
+			left_count = (noise == 1) ? left_count : left_count2;
+
+			if (abs(right_count - left_count) <= 1) {
+				flag = 1;
+				eye_radios[0] = left_count > right_count ? left_count : right_count;
+				printf("<break poin3> left_count: %d, right_count %d\n", left_count, right_count);
+			}
+
+			else if (right_count > left_count) {
+				center_x++;
+			}
+
+			else if (right_count < left_count) {
+				center_x--;
+			}
+		}
+
+		flag = 0; // ëˆˆ ë™ê³µì˜ center_yê°’ ì°¾ê¸°
+		while (!flag) {
+			int up_count = 0;
+			int up_count2 = 0;
+			int noise = 0;
+			for (int i = center_y - 1; i > 0; i--) {
+				if (Mat_img.at<uchar>(i, center_x) == 0) {
+					if (noise == 0) {
+						up_count++;
+					}
+					up_count2++;
+				}
+				else {
+					if (Mat_img.at<uchar>(i + 1, center_x) == 0) {
+						noise++;
+					}
+
+					if (noise > 1) {
+						break;
+					}
+
+					up_count2++;
+				}
+			}
+
+			up_count = noise == 1 ? up_count : up_count2;
+
+			int down_count = 0;
+			int down_count2 = 0;
+			noise = 0;
+			for (int i = center_y + 1; i < Mat_img.rows; i++) {
+				if (Mat_img.at<uchar>(i, center_x) == 0) {
+					if (noise == 0) {
+						down_count++;
+					}
+					down_count2++;
+				}
+				else {
+					if (Mat_img.at<uchar>(i - 1, center_x) == 0) {
+						noise++;
+					}
+
+					if (noise > 1) {
+						break;
+					}
+
+					down_count2++;
+				}
+			}
+
+			down_count = noise == 1 ? down_count : down_count2;
+
+			if (abs(down_count - up_count) <= 1) {
+				flag = 1;
+				eye_radios[1] = up_count > down_count ? up_count : down_count;
+				printf("<break poin4> up_count: %d, down_count %d\n", up_count, down_count);
+			}
+
+			else if (up_count > down_count) {
+				center_y--;
+			}
+
+			else if (up_count < down_count) {
+				center_y++;
+			}
+		}
+
+
+		// test
+		for (int i = 0; i < Mat_img.rows; i++) {
+			for (int j = 0; j < Mat_img.cols; j++) {
+				if (i == center_y && j == center_x) {
+					printf("7");
+				}
+
+				else if (Mat_img.at<uchar>(i, j) == 255) {
+					printf("*");
+				}
+
+				else {
+					printf("@");
+				}
+			}
+			printf("\n");
+		}
+
+		/* ì´ë¯¸ì§€ ì¶œë ¥
+		for (int i = 0; i < Mat_img.rows; i++) {
+		for (int j = 0; j < Mat_img.cols; j++) {
+		printf("%d ", Mat_img.at<uchar>(i, j));
+		}
+		printf("\n");
+		}
+		*/
+
+		printf("íƒ€ì›ì˜ ì§§ì€ ë°˜ì§€ë¦„ ë° ê¸´ ë°˜ì§€ë¦„ %d %d\n", eye_radios[1], eye_radios[0]); // íƒ€ì›ì˜ ì§§ì€ ë°˜ì§€ë¦„ê³¼ ê¸´ ë°˜ì§€ë¦„
+		radios = eye_radios[0] > eye_radios[1] ? eye_radios[0] : eye_radios[1];
+		//cvCircle(img2, cvPoint(center_x, center_y), radios, CV_RGB(255, 0, 0), 1, 8, 0); // ëˆˆë™ì ì˜ì—­ detect
+
+
+
+		// ë°ì´í„° ë³€í˜• ì²˜ë¦¬
+		cvResetImageROI(img2);
+		//cvSetImageROI(img2, cvRect(info[1][0] - (info[1][2] / 2) + center_x - radios, info[1][1] - (info[1][2] / 2) + center_y - radios, radios * 2, radios * 2));
+		//cvAddS(img2, cvScalar(200), img2);
+
+		IplImage* mask_img = cvCreateImage(cvSize(radios * 2, radios * 2), IPL_DEPTH_8U, 1); // 3
+		IplImage* test = cvCreateImage(cvSize(100, 100), IPL_DEPTH_8U, 3);
+		cvSet(mask_img, cvScalarAll(255));
+		cvSet(test, cvScalarAll(255));
+
+		cvCircle(mask_img, cvPoint(radios, radios), radios*0.85, CV_RGB(0, 0, 0), -1, 8, 0);
+		cvCircle(mask_img, cvPoint(radios, radios), radios*0.45, CV_RGB(255, 255, 255), -1, 8, 0);
+
+		cout << "radios: " << radios << endl;
+
+		cvCircle(test, cvPoint(50, 50), 50, CV_RGB(255, 0, 0), 1, 8, 0);
+		cvCircle(test, cvPoint(50, 50), 40, CV_RGB(0, 0, 0), -1, 8, 0);
+		cvCircle(test, cvPoint(50, 50), 20, CV_RGB(255, 255, 255), -1, 8, 0);
+
+		//cvNamedWindow("mask", CV_WINDOW_AUTOSIZE);
+		//cvShowImage("mask", mask_img);
+
+		//cvNamedWindow("testa", CV_WINDOW_AUTOSIZE);
+		//cvShowImage("testa", test);
+		//cvSet(mask_img, CV_RGB(0, 0, 0));
+		//cvCircle(mask_img, cvPoint(radios, radios), radios, CV_RGB(0, 0, 0), 1, 8, -1);
+
+		//double value = cvGetReal2D(mask_img, 0, 0);
+
+		int target_position[10000][2] = { 0 };
+		int t_index = 0;
+		for (int i = 0; i < radios * 2; i++) {
+			for (int j = 0; j < radios * 2; j++) {
+				double value = cvGetReal2D(mask_img, i, j);
+				//int a = value > 100 ? 2 : 0;
+				//cout << a << " ";
+
+				if (value < 100) {
+					target_position[t_index][0] = i;
+					target_position[t_index][1] = j;
+					t_index++;
+				}
+			}
+		}
+
+		//cvResetImageROI(img2);
+
+		for (int i = 0; i < t_index; i++) { // donutëª¨ì–‘ìœ¼ë¡œ 
+			cvSetImageROI(m_pImage, cvRect(info[1][0] - (info[1][2] / 2) + center_x - radios + target_position[i][0], info[1][1] - (info[1][2] / 2) + center_y - radios + target_position[i][1], 1, 1));
+			cvSetImageROI(background, cvRect(info[1][0] - (info[1][2] / 2) + center_x - radios + target_position[i][0], info[1][1] - (info[1][2] / 2) + center_y - radios + target_position[i][1], 1, 1));
+			cvAddS(m_pImage, cvScalar(150), m_pImage);
+			//cvAddWeighted(img2, 0.6, background, 0.4, 0.0, img2);
+			cvResetImageROI(m_pImage);
+			cvResetImageROI(background);
+		}
 		Invalidate(FALSE);
 	}
 	else 
-		MessageBox(_T("ÀÌ¹ÌÁö¸¦ ¸ÕÀú ·ÎµåÇØÁÖ¼¼¿ä."));
+		MessageBox(_T("ì´ë¯¸ì§€ë¥¼ ë¨¼ì € ë¡œë“œí•´ì£¼ì„¸ìš”."));
+}
+
+vector<vector<int> > CMFCApplication1Dlg::detectFace(Mat frame) {
+	vector<Rect> faces;
+	vector<Rect> eyes;
+	vector<vector<int> > info(2, vector<int>(3, 0));
+	int info_index = 0;
+	Mat frame_gray;
+
+	cvtColor(frame, frame_gray, CV_BGR2GRAY);
+	equalizeHist(frame_gray, frame_gray);
+
+	if (!face_cascade.load(face_cascade_name)) {
+		printf("error face cascade loading\n");
+	}
+	if (!eyes_cascade.load(eyes_cascade_name)) {
+		printf("error eyes cascade loading\n");
+	}
+
+	//Detect Face
+	face_cascade.detectMultiScale(frame_gray, faces, 1.1, 2, 0 | CV_HAAR_SCALE_IMAGE, Size(30, 30));
+
+	for (size_t i = 0; i < faces.size(); i++) {
+		Point center(faces[i].x + faces[i].width*0.5, faces[i].y + faces[i].height*0.5);
+		//rectangle(frame, Point(faces[i].x, faces[i].y), Point(faces[i].x + faces[i].width, faces[i].y + faces[i].height), Scalar(255, 0, 0), 2, 8, 0);
+
+		Mat faceR01 = frame_gray(faces[i]);
+
+		//Detect eyes
+		eyes_cascade.detectMultiScale(faceR01, eyes, 1.1, 2, 0 | CV_HAAR_SCALE_IMAGE, Size(30, 30));
+
+		for (size_t j = 0; j < eyes.size(); j++) {
+			Point center(faces[i].x + eyes[j].x + eyes[j].width*0.5, faces[i].y + eyes[j].y + eyes[j].height*0.5);
+			int radius = cvRound((eyes[j].width + eyes[j].height)*0.25);
+			//circle(frame, center, radius, Scalar(255, 0, 0), 2, 8, 0);
+
+			//printf("center: %d %d %d", center.x, center.y, radius);
+			info[info_index][0] = center.x;
+			info[info_index][1] = center.y;
+			info[info_index][2] = radius;
+			info_index++;
+		}
+	}
+
+	//imshow("Face detection", frame);
+	return info;
 }
