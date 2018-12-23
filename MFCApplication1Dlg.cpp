@@ -810,3 +810,96 @@ vector<vector<int> > CMFCApplication1Dlg::detectFace(Mat frame) {
 	//imshow("Face detection", frame);
 	return info;
 }
+
+/* 
+입력 : 이미지 data frame,
+출력 : 눈 영역 roi의 center.x, center.y, r vecor info
+*/
+vector<vector<int> > detectFace(Mat frame) {
+	vector<Rect> faces;
+	vector<Rect> eyes;
+	vector<vector<int> > info(2, vector<int>(3, 0));
+	int info_index = 0;
+	Mat frame_gray;
+
+	cvtColor(frame, frame_gray, CV_BGR2GRAY);
+	equalizeHist(frame_gray, frame_gray);
+
+	//Detect Face
+	face_cascade.detectMultiScale(frame_gray, faces, 1.1, 2, 0 | CV_HAAR_SCALE_IMAGE, Size(30, 30));
+
+	for (size_t i = 0; i < faces.size(); i++) {
+		Point center(faces[i].x + faces[i].width*0.5, faces[i].y + faces[i].height*0.5);
+		//rectangle(frame, Point(faces[i].x, faces[i].y), Point(faces[i].x + faces[i].width, faces[i].y + faces[i].height), Scalar(255, 0, 0), 2, 8, 0);
+
+		Mat faceR01 = frame_gray(faces[i]);
+
+		//Detect eyes
+		eyes_cascade.detectMultiScale(faceR01, eyes, 1.1, 2, 0 | CV_HAAR_SCALE_IMAGE, Size(30, 30));
+	
+		for (size_t j = 0; j < eyes.size(); j++) {
+			Point center(faces[i].x + eyes[j].x + eyes[j].width*0.5, faces[i].y + eyes[j].y + eyes[j].height*0.5);
+			int radius = cvRound((eyes[j].width + eyes[j].height)*0.25);
+			//circle(frame, center, radius, Scalar(255, 0, 0), 2, 8, 0);
+
+			//printf("center: %d %d %d", center.x, center.y, radius);
+			info[info_index][0] = center.x;
+			info[info_index][1] = center.y;
+			info[info_index][2] = radius;
+			info_index++;
+		}
+	}
+
+	//imshow("Face detection", frame);
+	return info;
+}
+
+void swap_pix(int x, int y, int width, int height, IplImage* img1) {
+	unsigned char arr[100000][3] = { 0 };
+	int arr_index = 0;
+
+	cout << width << " " << height << endl;
+
+	for (int i = x; i < x + height; i++) {
+		for (int j = y; j < y + width; j++) {
+			arr[arr_index][0] = img1->imageData[(i*img1->widthStep) + j * 3 + 0];
+			arr[arr_index][1] = img1->imageData[(i*img1->widthStep) + j * 3 + 1];
+			arr[arr_index][2] = img1->imageData[(i*img1->widthStep) + j * 3 + 2];
+
+			arr_index++;
+		}
+	}
+
+	for (int i = 0; i < arr_index; i++) // 픽셀 값 mix
+	{
+		int j = rand() % arr_index;
+		int k = rand() % arr_index;
+		if (j != k)
+		{
+			unsigned char temp_1 = arr[j][0];
+			unsigned char temp_2 = arr[j][1];
+			unsigned char temp_3 = arr[j][2];
+
+			arr[j][0] = arr[k][0];
+			arr[j][1] = arr[k][1];
+			arr[j][2] = arr[k][2];
+
+			arr[k][0] = temp_1;
+			arr[k][1] = temp_2;
+			arr[k][2] = temp_3;
+		}
+	}
+
+	arr_index = 0;
+
+	for (int i = x; i < x + height; i++) {
+		for (int j = y; j < y + width; j++) {
+			img1->imageData[(i*img1->widthStep) + j * 3 + 0] = arr[arr_index][0];
+			img1->imageData[(i*img1->widthStep) + j * 3 + 1] = arr[arr_index][1];
+			img1->imageData[(i*img1->widthStep) + j * 3 + 2] = arr[arr_index][2];
+
+			arr_index++;
+		}
+	}
+
+}
