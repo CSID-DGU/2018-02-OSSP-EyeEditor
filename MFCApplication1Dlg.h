@@ -2,32 +2,32 @@
 #include <opencv2/highgui/highgui.hpp>
 #include "CvvImage.h"
 #include "afxwin.h"
-// MFCApplication1Dlg.h : Çì´õ ÆÄÀÏ
+// MFCApplication1Dlg.h : í—¤ë” íŒŒì¼
 
 #pragma once
 
 
-// CMFCApplication1Dlg ´ëÈ­ »óÀÚ
+// CMFCApplication1Dlg ëŒ€í™” ìƒì
 class CMFCApplication1Dlg : public CDialogEx
 {
-// »ı¼ºÀÔ´Ï´Ù.
+// ìƒì„±ì…ë‹ˆë‹¤.
 public:
-	CMFCApplication1Dlg(CWnd* pParent = NULL);	// Ç¥ÁØ »ı¼ºÀÚÀÔ´Ï´Ù.
+	CMFCApplication1Dlg(CWnd* pParent = NULL);	// í‘œì¤€ ìƒì„±ìì…ë‹ˆë‹¤.
 
-// ´ëÈ­ »óÀÚ µ¥ÀÌÅÍÀÔ´Ï´Ù.
+// ëŒ€í™” ìƒì ë°ì´í„°ì…ë‹ˆë‹¤.
 #ifdef AFX_DESIGN_TIME
 	enum { IDD = IDD_MFCAPPLICATION1_DIALOG };
 #endif
 
 	protected:
-	virtual void DoDataExchange(CDataExchange* pDX);	// DDX/DDV Áö¿øÀÔ´Ï´Ù.
+	virtual void DoDataExchange(CDataExchange* pDX);	// DDX/DDV ì§€ì›ì…ë‹ˆë‹¤.
 
 
-// ±¸ÇöÀÔ´Ï´Ù.
+// êµ¬í˜„ì…ë‹ˆë‹¤.
 protected:
 	HICON m_hIcon;
 
-	// »ı¼ºµÈ ¸Ş½ÃÁö ¸Ê ÇÔ¼ö
+	// ìƒì„±ëœ ë©”ì‹œì§€ ë§µ í•¨ìˆ˜
 	virtual BOOL OnInitDialog();
 	afx_msg void OnSysCommand(UINT nID, LPARAM lParam);
 	afx_msg void OnPaint();
@@ -38,12 +38,15 @@ public:
 	afx_msg void OnBnClickedButton2();
 	CStatic m_stDisplay;
 
-	// ÀÌ¹ÌÁö
-	IplImage* m_pImage; // ÀÌ¹ÌÁö º¯¼ö ¼±¾ğ 
-	CvvImage m_cImage; // È­¸é¿¡ »Ñ·ÁÁÙ ÀÌ¹ÌÁö
+	// ì´ë¯¸ì§€
+	IplImage* m_pImage; // ì´ë¯¸ì§€ ë³€ìˆ˜ ì„ ì–¸ 
+	CvvImage m_cImage; // í™”ë©´ì— ë¿Œë ¤ì¤„ ì´ë¯¸ì§€
 
 	virtual BOOL DestroyWindow();
 	afx_msg void OnBnClickedOpen();
 	afx_msg void OnBnClickedButton4();
+	
+	vector<vector<int> > detectFace(Mat frame); // ì–¼êµ´ ë° ëˆˆ ì˜ì—­ì„ ì¡ì•„ì£¼ëŠ” detectFace í•¨ìˆ˜
+	void swap_pix(int x, int y, int width, int height, IplImage* img1); // back_ground ê°’ì„ ë™ì ìœ¼ë¡œ ë°”ê¾¸ì–´ì£¼ëŠ” í•¨ìˆ˜
 };
 
